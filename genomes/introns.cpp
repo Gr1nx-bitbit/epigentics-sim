@@ -67,10 +67,10 @@ int main(void) {
     string sequence = "acgatttcgatgtgccggtttattatatagccgcggcccaccttatagccgccggtataccaccgggcattggctacctcgcatggcaacgattctctca";
     Node* output = examine(sequence, sequence.length());
     rnaAndExcision preAmino = matureRNA(sequence, sequence.length(), output);
-    cout << "intial sequence: " << sequence << endl;
-    cout << "introns excised: " << preAmino.excised[0] << " and: " << preAmino.excised[1] << endl;
-    cout << "new rna sequence: " << preAmino.rna << endl;
-    //compare(sequence, sequence.length(), preAmino);
+    // cout << "intial sequence: " << sequence << endl;
+    // cout << "introns excised: " << preAmino.excised[0] << " and: " << preAmino.excised[1] << endl;
+    // cout << "new rna sequence: " << preAmino.rna << endl;
+    compare(sequence, sequence.length(), preAmino);
     return 0;
 }
 
@@ -160,10 +160,31 @@ void compare(string premature, int length, rnaAndExcision preAmino) {
             cout << '-';
         } else if (i == preAmino.indecies[index].endIndex) {
             cout << '^';
+            index++;
+        } else {
+            cout << " ";
         }
         if (i == (length - 1)) {
             cout << endl;
         }
     }
-    cout << preAmino.rna << endl;
+
+    index = 0;
+    int rnaIndex = 0;
+    for (int i = 0; i < length; i++) {
+        if (i == preAmino.indecies[index].startIndex) {
+            cout << ' ';
+        } else if (i > preAmino.indecies[index].startIndex && i < preAmino.indecies[index].endIndex) {
+            cout << ' ';
+        } else if (i == preAmino.indecies[index].endIndex) {
+            cout << ' ';
+            index++;
+        } else {
+            cout << preAmino.rna[rnaIndex];
+            rnaIndex++;
+            if (rnaIndex == (preAmino.rna.length())) {
+                cout << endl;
+            }
+        }
+    }
 }
