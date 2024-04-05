@@ -1,9 +1,14 @@
+introns: introns.o Node.o genes.o
+
 introns.o: introns.cpp
 	g++ -c introns.cpp
 
-run: introns.o
-	g++ *.o -o introns
+Node.o: Node.cpp
+	g++ -c Node.cpp
+
+genes.o: genes.cpp
+	g++ -c genes.cpp
 
 clean:
-	rm *.out
+	rm *.o
 	find . -perm +100 -type f -delete

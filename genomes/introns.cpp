@@ -67,9 +67,6 @@ int main(void) {
     string sequence = "acgatttcgatgtgccggtttattatatagccgcggcccaccttatagccgccggtataccaccgggcattggctacctcgcatggcaacgattctctca";
     Node* output = examine(sequence, sequence.length());
     rnaAndExcision preAmino = matureRNA(sequence, sequence.length(), output);
-    // cout << "intial sequence: " << sequence << endl;
-    // cout << "introns excised: " << preAmino.excised[0] << " and: " << preAmino.excised[1] << endl;
-    // cout << "new rna sequence: " << preAmino.rna << endl;
     compare(sequence, sequence.length(), preAmino);
     return 0;
 }
@@ -187,4 +184,11 @@ void compare(string premature, int length, rnaAndExcision preAmino) {
             }
         }
     }
+}
+
+//takes in a string matureRNA and converts it into a string of
+//polypeptide chains. Takes codons mapped to their respective
+//amino acid and replaces the codon with the amino acid
+string protienSynthesis(string matureRna) {
+
 }
