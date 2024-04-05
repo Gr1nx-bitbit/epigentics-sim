@@ -62,12 +62,14 @@ class Node {
 Node* examine(string sequence, int length);
 rnaAndExcision matureRNA(string sequence, int length, Node* head);
 void compare(string premature, int length, rnaAndExcision preAmino);
+string dnaTOrna(string dna, int length);
 
 int main(void) {
     string sequence = "acgatttcgatgtgccggtttattatatagccgcggcccaccttatagccgccggtataccaccgggcattggctacctcgcatggcaacgattctctca";
-    Node* output = examine(sequence, sequence.length());
-    rnaAndExcision preAmino = matureRNA(sequence, sequence.length(), output);
-    compare(sequence, sequence.length(), preAmino);
+    string input = dnaTOrna(sequence, sequence.length());
+    Node* output = examine(input, input.length());
+    rnaAndExcision preAmino = matureRNA(input, input.length(), output);
+    compare(input, input.length(), preAmino);
     return 0;
 }
 
@@ -79,10 +81,10 @@ Node* examine(string sequence, int length) {
 
     for (int i = 0; i < length; i++)
     {
-        if (!start && (sequence[i] == 'g') && (sequence[i+1] == 't') && (i < (length - 1))) {
+        if (!start && (sequence[i] == 'g') && (sequence[i+1] == 'u') && (i < (length - 1))) {
             start = true;
             genCur.startIndex = i;
-        } else if (start && (sequence[i] == 'a') && (sequence[i+1]) && (i < (length - 1))) {
+        } else if (start && (sequence[i] == 'a') && (sequence[i+1] == 'g') && (i < (length - 1))) {
             genCur.endIndex = i+1;
             if (!cursor->isGene()) {
                 cursor->setGene(genCur);
@@ -186,9 +188,26 @@ void compare(string premature, int length, rnaAndExcision preAmino) {
     }
 }
 
+string dnaTOrna(string dna, int length) {
+    string prematureRNA;
+    for (int i = 0; i < length; i++) {
+        if (dna[i] == 'a') {
+            prematureRNA += 'u';
+        } else if (dna[i] == 't') {
+            prematureRNA += 'a';
+        } else if (dna[i] == 'c') {
+            prematureRNA += 'g';
+        } else {
+            prematureRNA += 'c';
+        }
+    }
+
+    return prematureRNA;
+}
+
 //takes in a string matureRNA and converts it into a string of
 //polypeptide chains. Takes codons mapped to their respective
 //amino acid and replaces the codon with the amino acid
-string protienSynthesis(string matureRna) {
+string peptideSynthesis(string matureRna) {
 
 }
