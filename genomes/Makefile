@@ -1,4 +1,5 @@
 introns: introns.o Node.o genes.o
+	g++ introns.o Node.o genes.o
 
 introns.o: introns.cpp
 	g++ -c introns.cpp

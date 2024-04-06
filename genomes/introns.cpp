@@ -65,7 +65,7 @@ void compare(string premature, int length, rnaAndExcision preAmino);
 string dnaTOrna(string dna, int length);
 
 int main(void) {
-    string sequence = "acgatttcgatgtgccggtttattatatagccgcggcccaccttatagccgccggtataccaccgggcattggctacctcgcatggcaacgattctctca";
+    string sequence = "agggaatactggtcaagaggttagggcgcaccgtccgtcggacatgacacctgtagagctatgtagtgtacggtatcgatgcagggcagggcggtgcgta";
     string input = dnaTOrna(sequence, sequence.length());
     Node* output = examine(input, input.length());
     rnaAndExcision preAmino = matureRNA(input, input.length(), output);
@@ -208,6 +208,6 @@ string dnaTOrna(string dna, int length) {
 //takes in a string matureRNA and converts it into a string of
 //polypeptide chains. Takes codons mapped to their respective
 //amino acid and replaces the codon with the amino acid
-string peptideSynthesis(string matureRna) {
+// string peptideSynthesis(string matureRna) {
 
-}
+// }
