@@ -74,7 +74,7 @@ bool CodonTree::isG() {
     return nucG;
 }
 
-bool CodonTree::setAcid(char* acid) {
+bool CodonTree::setAcid(std::string acid) {
     aminoAcid = acid;
     return true;
 }
@@ -89,7 +89,7 @@ CodonTree::CodonTree() {
     nucA = false;
     setG(nullptr);
     nucG = false;
-    setAcid('\0');
+    setAcid(NULL);
 }
 
 //parent is the parent of this node and int is the nucleotide
@@ -100,7 +100,7 @@ CodonTree::CodonTree(CodonTree* parent, int nucleotide) {
     setC(nullptr);
     setA(nullptr);
     setG(nullptr);
-    setAcid('\0');
+    setAcid(NULL);
     if (nucleotide == 1) {
         nucU = true;
     } else if (nucleotide == 2) {
@@ -112,7 +112,7 @@ CodonTree::CodonTree(CodonTree* parent, int nucleotide) {
     }
 }
 
-CodonTree::CodonTree(CodonTree* parent, int nucleotide, char* acid) {
+CodonTree::CodonTree(CodonTree* parent, int nucleotide, std::string acid) {
     setParent(parent);
     setU(nullptr);
     setC(nullptr);
@@ -130,9 +130,12 @@ CodonTree::CodonTree(CodonTree* parent, int nucleotide, char* acid) {
     }
 }
 
+//I'll figure out the destructor later. I'll have to use recursion to get through all the nodes!
 // CodonTree::~CodonTree() {
 //     CodonTree* cursor;
-//     for (cursor = getParent()) {
+//     for (cursor = getParent(); cursor != nullptr; cursor = cursor->getParent());
+//     CodonTree* traverse;
+//     for (traverse = cursor; traverse->getU() != nullptr; traverse->getA()) {
 
 //     }
 // }

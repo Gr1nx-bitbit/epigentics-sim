@@ -1,7 +1,7 @@
-#ifndef AMINDOCODON_H
-#define AMINOCODON_H
+#ifndef CODONTREE_H
+#define CODONTREE_H
 
-#include <iostream>
+#include <string>
 #include "AminoCodon.h"
 
 class CodonTree {
@@ -15,8 +15,8 @@ class CodonTree {
         bool nucA;
         CodonTree* g;
         bool nucG;
-        //std::string aminoAcid;
-        char* aminoAcid;
+        std::string aminoAcid;
+        //char* aminoAcid;
         bool setParent(CodonTree* parent);
         CodonTree* getParent();
         bool setU(CodonTree* u);
@@ -31,12 +31,12 @@ class CodonTree {
         bool setG(CodonTree* g);
         CodonTree* getG();
         bool isG();
-        bool setAcid(char* acid);
+        bool setAcid(std::string acid);
 
     public:
         CodonTree();
         CodonTree(CodonTree* parent, int nucleotide);
-        CodonTree(CodonTree* parent, int nucleotide, char* acid);
+        CodonTree(CodonTree* parent, int nucleotide, std::string acid);
         ~CodonTree();
         void addAminoCodon(CodonTree* cursor, AminoCodon acPair, int index);
 };

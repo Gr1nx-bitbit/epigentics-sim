@@ -1,4 +1,13 @@
+#ifndef AMINOCODON_H
+#define AMINOCODON_H
+
+#include <string>
+
 struct AminoCodon {
-    char* aminoAcid;
-    char* codon;
+    std::string aminoAcid;
+    std::string codon;
+    bool startCodon;
+    bool terminationCodon;
 };
+
+#endif
