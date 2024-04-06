@@ -29,6 +29,7 @@ class CodonTree {
         CodonTree();
         CodonTree(CodonTree* parent);
         CodonTree(CodonTree* parent, char* acid);
+        ~CodonTree();
         void addAminoCodon(CodonTree* cursor, AminoCodon acPair, int index);
 };
 

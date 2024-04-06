@@ -90,6 +90,13 @@ CodonTree::CodonTree(CodonTree* parent, char* acid) {
     setAcid(acid);
 }
 
+// CodonTree::~CodonTree() {
+//     CodonTree* cursor;
+//     for (cursor = getParent()) {
+
+//     }
+// }
+
 //sample invoke
 //aminoCodon(head, acPair, -1);
 void CodonTree::addAminoCodon(CodonTree* cursor, AminoCodon acPair, int index) {
