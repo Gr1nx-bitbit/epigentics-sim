@@ -4,6 +4,15 @@
 //the set functions instead of doing this... just
 //saying
 
+// #define CONDITION (AC, I, N) \
+// ( \
+//     ((AC).codon[(I) + 1] == (N)) \
+// )
+
+// #define IACTION ()
+
+// #define EACTION
+
 bool CodonTree::setParent(CodonTree* parent) {
     this->parent = parent;
     return true;
@@ -81,10 +90,16 @@ CodonTree::CodonTree(CodonTree* parent, char* acid) {
     setAcid(acid);
 }
 
+//sample invoke
+//aminoCodon(head, acPair, -1);
 void CodonTree::addAminoCodon(CodonTree* cursor, AminoCodon acPair, int index) {
+    //We need a null head that just acts as a starting point so we can see what the
+    //NEXT amino acid is
+    //right now, I don't know if this first conditional sets the amino acid at
+    //the nucleotide just before the leaf, or at the leaf nucleotide!
     if (acPair.codon[index + 1] == '\0') {
-        setAcid(acPair.aminoAcid);
-    } else if (acPair.codon[index] == 'u') {
+        cursor->setAcid(acPair.aminoAcid);
+    } else if (acPair.codon[index + 1] == 'u') {
         if (cursor->getU() != nullptr) {
             addAminoCodon(cursor->getU(), acPair, (index + 1));
         } else {
@@ -92,7 +107,7 @@ void CodonTree::addAminoCodon(CodonTree* cursor, AminoCodon acPair, int index) {
             cursor->setU(add);
             addAminoCodon(cursor->getU(), acPair, (index + 1));
         }
-    } else if (acPair.codon[index] == 'c') {
+    } else if (acPair.codon[index + 1] == 'c') {
         if (cursor->getC() != nullptr) {
             addAminoCodon(cursor->getC(), acPair, (index + 1));
         } else {
@@ -100,7 +115,7 @@ void CodonTree::addAminoCodon(CodonTree* cursor, AminoCodon acPair, int index) {
             cursor->setC(add);
             addAminoCodon(cursor->getC(), acPair, (index + 1));
         }
-    } else if (acPair.codon[index] == 'a') {
+    } else if (acPair.codon[index + 1] == 'a') {
         if (cursor->getA() != nullptr) {
             addAminoCodon(cursor->getA(), acPair, (index + 1));
         } else {
@@ -108,7 +123,7 @@ void CodonTree::addAminoCodon(CodonTree* cursor, AminoCodon acPair, int index) {
             cursor->setA(add);
             addAminoCodon(cursor->getA(), acPair, (index + 1));
         }
-    } else if (acPair.codon[index] == 'g') {
+    } else if (acPair.codon[index + 1] == 'g') {
         if (cursor->getG() != nullptr) {
             addAminoCodon(cursor->getG(), acPair, (index + 1));
         } else {
