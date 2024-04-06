@@ -31,6 +31,10 @@ CodonTree* CodonTree::getU() {
     return u;
 }
 
+bool CodonTree::isU() {
+    return nucU;
+}
+
 bool CodonTree::setC(CodonTree* c) {
     this->c = c;
     return true;
@@ -38,6 +42,10 @@ bool CodonTree::setC(CodonTree* c) {
 
 CodonTree* CodonTree::getC() {
     return c;
+}
+
+bool CodonTree::isC() {
+    return nucC;
 }
 
 bool CodonTree::setA(CodonTree* a) {
@@ -49,6 +57,10 @@ CodonTree* CodonTree::getA() {
     return a;
 }
 
+bool CodonTree::isA() {
+    return nucA;
+}
+
 bool CodonTree::setG(CodonTree* g) {
     this->g = g;
     return true;
@@ -56,6 +68,10 @@ bool CodonTree::setG(CodonTree* g) {
 
 CodonTree* CodonTree::getG() {
     return g;
+}
+
+bool CodonTree::isG() {
+    return nucG;
 }
 
 bool CodonTree::setAcid(char* acid) {
@@ -66,28 +82,52 @@ bool CodonTree::setAcid(char* acid) {
 CodonTree::CodonTree() {
     setParent(nullptr);
     setU(nullptr);
+    nucU = false;
     setC(nullptr);
+    nucC = false;
     setA(nullptr);
+    nucA = false;
     setG(nullptr);
+    nucG = false;
     setAcid('\0');
 }
 
-CodonTree::CodonTree(CodonTree* parent) {
+//parent is the parent of this node and int is the nucleotide
+//to which this node will be. 1 is u, 2 is c, 3 is a, 4 is g.
+CodonTree::CodonTree(CodonTree* parent, int nucleotide) {
     setParent(parent);
     setU(nullptr);
     setC(nullptr);
     setA(nullptr);
     setG(nullptr);
     setAcid('\0');
+    if (nucleotide == 1) {
+        nucU = true;
+    } else if (nucleotide == 2) {
+        nucC = true;
+    } else if (nucleotide == 3) {
+        nucA = true;
+    } else if (nucleotide == 4) {
+        nucG = true;
+    }
 }
 
-CodonTree::CodonTree(CodonTree* parent, char* acid) {
+CodonTree::CodonTree(CodonTree* parent, int nucleotide, char* acid) {
     setParent(parent);
     setU(nullptr);
     setC(nullptr);
     setA(nullptr);
     setG(nullptr);
     setAcid(acid);
+    if (nucleotide == 1) {
+        nucU = true;
+    } else if (nucleotide == 2) {
+        nucC = true;
+    } else if (nucleotide == 3) {
+        nucA = true;
+    } else if (nucleotide == 4) {
+        nucG = true;
+    }
 }
 
 // CodonTree::~CodonTree() {
@@ -110,7 +150,7 @@ void CodonTree::addAminoCodon(CodonTree* cursor, AminoCodon acPair, int index) {
         if (cursor->getU() != nullptr) {
             addAminoCodon(cursor->getU(), acPair, (index + 1));
         } else {
-            CodonTree* add = new CodonTree(cursor);
+            CodonTree* add = new CodonTree(cursor, 1);
             cursor->setU(add);
             addAminoCodon(cursor->getU(), acPair, (index + 1));
         }
@@ -118,7 +158,7 @@ void CodonTree::addAminoCodon(CodonTree* cursor, AminoCodon acPair, int index) {
         if (cursor->getC() != nullptr) {
             addAminoCodon(cursor->getC(), acPair, (index + 1));
         } else {
-            CodonTree* add = new CodonTree(cursor);
+            CodonTree* add = new CodonTree(cursor, 2);
             cursor->setC(add);
             addAminoCodon(cursor->getC(), acPair, (index + 1));
         }
@@ -126,7 +166,7 @@ void CodonTree::addAminoCodon(CodonTree* cursor, AminoCodon acPair, int index) {
         if (cursor->getA() != nullptr) {
             addAminoCodon(cursor->getA(), acPair, (index + 1));
         } else {
-            CodonTree* add = new CodonTree(cursor);
+            CodonTree* add = new CodonTree(cursor, 3);
             cursor->setA(add);
             addAminoCodon(cursor->getA(), acPair, (index + 1));
         }
@@ -134,7 +174,7 @@ void CodonTree::addAminoCodon(CodonTree* cursor, AminoCodon acPair, int index) {
         if (cursor->getG() != nullptr) {
             addAminoCodon(cursor->getG(), acPair, (index + 1));
         } else {
-            CodonTree* add = new CodonTree(cursor);
+            CodonTree* add = new CodonTree(cursor, 4);
             cursor->setG(add);
             addAminoCodon(cursor->getG(), acPair, (index + 1));
         }
