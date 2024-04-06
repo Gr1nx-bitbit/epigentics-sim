@@ -5,11 +5,13 @@
 using namespace std;
 
 int main(void) {
-    string codon = "aug";
-    AminoCodon pair;
-    pair.codon = codon;
-    pair.aminoAcid = "Methionene";
+    AminoCodon* pair = new AminoCodon;
+    pair->codon = "aug";
+    pair->aminoAcid = "Methionene";
     CodonTree* head = new CodonTree();
-    head->addAminoCodon(head, pair, -1);
+    head->addAminoCodon(head, *pair, -1);
+    pair->codon = "auu";
+    pair->aminoAcid = "Isoleucine";
+    head->addAminoCodon(head, *pair, -1);
     return 0;
 }
