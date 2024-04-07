@@ -292,23 +292,24 @@ return tmp;
 //polypeptide chains. Takes codons mapped to their respective
 //amino acid and replaces the codon with the amino acid
 Node* peptideSynthesis(string matureRna, int length, CodonTree* head) {
-    char codon[3];
     Node* node = new Node();
     Node* cursor = node;
+    string codon = "";
+
     for (int i = 0; i < length; i++) {
         if ((i % 3 == 0) && (i != 0)) {
-            string codonIn;
-            for (int i = 0; i < 3; i++) {
-                codonIn += codon[i];
-            }
             if (cursor->getAmino() == "") {
-                cursor->setAmino(head->getAminoCodon(codonIn, head));
+                string amino = head->getAminoCodon(codon, head);
+                cursor->setAmino(amino);
             } else {
-                Node* nxt = new Node(head->getAminoCodon(codonIn, head));
-                cursor->setNext(nxt);
+                string amino = head->getAminoCodon(codon, head);
+                Node* next = new Node(amino);
+                cursor->setNext(next);
+                cursor = cursor->getNext();
             }
+            codon = matureRna[i];
         } else {
-            codon[i%3] = matureRna[i];
+            codon += matureRna[i];
         }
     }
 
