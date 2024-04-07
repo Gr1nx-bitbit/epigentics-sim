@@ -8,11 +8,11 @@ uca : Serine
 ucg : Serine
 uau : Tyrosine
 uac : Tyrosine
-uaa : ¡Ochre
-uag : ¡Amber
+uaa : /Ochre
+uag : /Amber
 ugu : Cysteine
 ugc : Cysteine
-uga : ¡Opal/Umber
+uga : /Opal|Umber
 ugg : Tryptophan
 cuu : Leucine
 cuc : Leucine
