@@ -32,6 +32,7 @@ class CodonTree {
         CodonTree* getG();
         bool isG();
         bool setAcid(std::string acid);
+        std::string getAcid(void);
 
     public:
         CodonTree();
@@ -39,6 +40,8 @@ class CodonTree {
         CodonTree(CodonTree* parent, int nucleotide, std::string acid);
         ~CodonTree();
         void addAminoCodon(CodonTree* cursor, AminoCodon acPair, int index);
+        void displayTree(CodonTree* head, CodonTree* cursor, char step, std::string path);
+        AminoCodon getAminoCodon(std::string codonORamino);
 };
 
 #endif

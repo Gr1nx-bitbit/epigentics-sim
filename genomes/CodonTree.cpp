@@ -2,6 +2,7 @@
 #include <iostream>
 using namespace std;
 //#define DEBUG
+#define DEBUGDISPLAY
 
 //I could make a macro function and inflate all
 //the set functions instead of doing this... just
@@ -90,6 +91,10 @@ bool CodonTree::isG() {
 bool CodonTree::setAcid(std::string acid) {
     aminoAcid = acid;
     return true;
+}
+
+string CodonTree::getAcid(void) {
+    return aminoAcid;
 }
 
 /*
@@ -232,5 +237,22 @@ void CodonTree::addAminoCodon(CodonTree* cursor, AminoCodon acPair, int index) {
             #endif
             addAminoCodon(cursor->getG(), acPair, (index + 1));
         }
+    }
+}
+
+void CodonTree::displayTree(CodonTree* head, CodonTree* cursor, char step, std::string path) {
+    path += step;
+    //I need to add a path! I want to see where we end up at!
+    if (cursor == nullptr) {
+        return;
+    } else {
+            displayTree(head, cursor->getU(), 'u', path);
+            displayTree(head, cursor->getC(), 'c', path);
+            displayTree(head, cursor->getA(), 'a', path);
+            displayTree(head, cursor->getG(), 'g', path);
+            if (cursor->getAcid() != "") {
+                cout << "Amino acid: " << cursor->getAcid() << endl;
+                cout << "Path: " << path << endl;
+            }
     }
 }

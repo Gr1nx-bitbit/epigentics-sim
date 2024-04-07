@@ -13,5 +13,7 @@ int main(void) {
     pair->codon = "auu";
     pair->aminoAcid = "Isoleucine";
     head->addAminoCodon(head, *pair, -1);
+    char yes;
+    head->displayTree(head, head, yes, "");
     return 0;
 }
