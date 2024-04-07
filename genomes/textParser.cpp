@@ -29,6 +29,9 @@ int main(int argC, char* argV[]) {
     return 0;
 }
 
+//this function takes in a line from the txt file 
+//containing the codon and amino acid pairs and returns
+//the pair in a AminoCodon
 AminoCodon parse(string input) {
     bool colon = false;
     AminoCodon tmp;
