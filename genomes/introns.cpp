@@ -1,4 +1,7 @@
 #include <iostream>
+#include "AminoCodon.h"
+#include "CodonTree.h"
+#include <fstream>
 using namespace std;
 
 struct genePosition {
@@ -16,18 +19,29 @@ class Node {
     private:
         genePosition gene;
         bool gen;
+        string aminoAcid;
         Node* next;
     public:
         Node() {
             gene.startIndex = 0;
             gene.endIndex = 0;
             gen = false;
+            aminoAcid = "";
             next = nullptr;
         }
 
         Node(genePosition geen) {
             gene = geen;
             gen = true;
+            aminoAcid = "";
+            next = nullptr;
+        }
+
+        Node(string acid) {
+            gene.startIndex = 0;
+            gene.endIndex = 0;
+            gen = false;
+            aminoAcid = acid;
             next = nullptr;
         }
 
@@ -50,6 +64,14 @@ class Node {
             return gen;
         }
 
+        string getAmino(void) {
+            return aminoAcid;
+        }
+
+        void setAmino(string acid) {
+            aminoAcid = acid;
+        }
+
         Node* getNext(void) {
             return next;
         }
@@ -59,17 +81,52 @@ class Node {
         }
 };
 
+/*
+––––––––––––––––––––––––––
+*   FUNCTION SIGNATURES  *
+––––––––––––––––––––––––––
+*/
+
 Node* examine(string sequence, int length);
 rnaAndExcision matureRNA(string sequence, int length, Node* head);
 void compare(string premature, int length, rnaAndExcision preAmino);
 string dnaTOrna(string dna, int length);
+AminoCodon parse(string input);
+Node* peptideSynthesis(string matureRna, int length, CodonTree* head);
+
+/*
+––––––––––––––––––––––––––
+*   FUNCTION SIGNATURES  *
+––––––––––––––––––––––––––
+*/
 
 int main(void) {
+    //takes a genetic sequence and returns the mRNA sequence with the introns excised and compares the original mRNA to 
+    //the solely exon mRNA
     string sequence = "agggaatactggtcaagaggttagggcgcaccgtccgtcggacatgacacctgtagagctatgtagtgtacggtatcgatgcagggcagggcggtgcgta";
-    string input = dnaTOrna(sequence, sequence.length());
-    Node* output = examine(input, input.length());
-    rnaAndExcision preAmino = matureRNA(input, input.length(), output);
-    compare(input, input.length(), preAmino);
+    string rnaSequence = dnaTOrna(sequence, sequence.length());
+    Node* output = examine(rnaSequence, rnaSequence.length());
+    rnaAndExcision preAmino = matureRNA(rnaSequence, rnaSequence.length(), output);
+    compare(rnaSequence, rnaSequence.length(), preAmino);
+
+    //create a codonTree to store all the amino acids
+    CodonTree* head = new CodonTree();
+    string aminoCodontext;
+    ifstream myFile("aminoCodon.txt");
+
+    //add all the amino acids and their path to the tree
+    while(getline(myFile, aminoCodontext, '\n')) {
+        AminoCodon acPair = parse(aminoCodontext);
+        head->addAminoCodon(head, acPair, -1);
+    }
+
+    //this isn't working right now
+    Node* peptides = peptideSynthesis(preAmino.rna, preAmino.rna.length(), head);
+    Node* cursor;
+    for (cursor = peptides; cursor; cursor = cursor->getNext()) {
+        cout << cursor->getAmino() << endl;
+    }
+
     return 0;
 }
 
@@ -205,9 +262,55 @@ string dnaTOrna(string dna, int length) {
     return prematureRNA;
 }
 
+AminoCodon parse(string input) {
+    bool colon = false;
+    AminoCodon tmp;
+    tmp.startCodon = false;
+    tmp.terminationCodon = false;
+    for (int index = 0; index < input.length(); index++) {
+        if (input[index] == ':') {
+            colon = true;            
+        } else if (!colon && input[index] != ' ') {
+            tmp.codon += input[index];
+        } else {
+            if (input[index] == '!') {
+                tmp.startCodon = true;
+                tmp.terminationCodon = false;
+            } else if (input[index] == '/') {
+                tmp.terminationCodon = true;
+                tmp.startCodon = false;
+            } else {
+                tmp.aminoAcid += input[index];
+            }
+        }
+    }
+
+return tmp;
+}
+
 //takes in a string matureRNA and converts it into a string of
 //polypeptide chains. Takes codons mapped to their respective
 //amino acid and replaces the codon with the amino acid
-// string peptideSynthesis(string matureRna) {
+Node* peptideSynthesis(string matureRna, int length, CodonTree* head) {
+    char codon[3];
+    Node* node = new Node();
+    Node* cursor = node;
+    for (int i = 0; i < length; i++) {
+        if ((i % 3 == 0) && (i != 0)) {
+            string codonIn;
+            for (int i = 0; i < 3; i++) {
+                codonIn += codon[i];
+            }
+            if (cursor->getAmino() == "") {
+                cursor->setAmino(head->getAminoCodon(codonIn, head));
+            } else {
+                Node* nxt = new Node(head->getAminoCodon(codonIn, head));
+                cursor->setNext(nxt);
+            }
+        } else {
+            codon[i%3] = matureRna[i];
+        }
+    }
 
-// }
+    return node;
+}

@@ -41,7 +41,7 @@ class CodonTree {
         ~CodonTree();
         void addAminoCodon(CodonTree* cursor, AminoCodon acPair, int index);
         void displayTree(CodonTree* head, CodonTree* cursor, char step, std::string path);
-        AminoCodon getAminoCodon(std::string codonORamino);
+        std::string getAminoCodon(std::string codon, CodonTree* cursor);
 };
 
 #endif

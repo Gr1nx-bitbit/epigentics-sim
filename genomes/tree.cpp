@@ -9,16 +9,19 @@ AminoCodon parse(string input);
 
 int main(void) {
     CodonTree* head = new CodonTree();
-    string text;
+    string aminoCodontext;
     ifstream myFile("aminoCodon.txt");
 
-    while(getline(myFile, text, '\n')) {
-        AminoCodon acPair = parse(text);
+    while(getline(myFile, aminoCodontext, '\n')) {
+        AminoCodon acPair = parse(aminoCodontext);
         head->addAminoCodon(head, acPair, -1);
     }
 
-    char yes;
-    head->displayTree(head, head, yes, "");
+    char codon[3] = {'a', 'u', 'g'};
+    string cool = codon;
+    string amino = head->getAminoCodon(cool, head);
+    cout << amino << endl;
+
     return 0;
 }
 

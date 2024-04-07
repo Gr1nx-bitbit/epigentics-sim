@@ -256,3 +256,27 @@ void CodonTree::displayTree(CodonTree* head, CodonTree* cursor, char step, std::
             }
     }
 }
+
+string CodonTree::getAminoCodon(string codon, CodonTree* cursor) {
+    for (int index = -1; true; index++) {
+        if (codon[index + 1] == 'u') {
+            if (cursor->getU() != nullptr) {
+                cursor = cursor->getU();
+            }
+        } else if (codon[index + 1] == 'c') {
+            if (cursor->getC() != nullptr) {
+                cursor = cursor->getC();
+            }
+        } else if (codon[index + 1] == 'a') {
+            if (cursor->getA() != nullptr) {
+                cursor = cursor->getA();
+            }
+        } else if (codon[index + 1] == 'g') {
+            if (cursor->getG() != nullptr) {
+                cursor = cursor->getG();
+            }
+        } else if (codon[index + 1] == '\0') {
+            return cursor->getAcid();
+        }
+    }
+}
