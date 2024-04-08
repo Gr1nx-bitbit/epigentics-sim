@@ -63,16 +63,7 @@ class Node {
         }
 
         ~Node() {
-            gene.startIndex = 0;
-            gene.endIndex = 0;
-            gen = false;
-            acPair.aminoAcid = "";
-            acPair.codon = "";
-            acPair.startCodon = false;
-            acPair.terminationCodon = false;
-            delete next;
-            parent = nullptr;
-            end = nullptr;
+            delete this;
         }
 
         genePosition getGene(void) {
@@ -443,16 +434,16 @@ vector<Node*> peptideSynthesis(string matureRna, int length, CodonTree* head) {
     //this deletes the acPair but not the whole thing for some reason. 
     //I should probably just make a destructor for the node!
     if (!sequences[index]->getEnd()->getAmino().terminationCodon) {
-        //cout << "Going to delete " << index << " sequence!" << endl;
+        cout << "Going to delete " << index << " sequence!" << endl;
         for (cursor = sequences[index]->getEnd(); cursor; cursor = cursor->getParent()) {
-            // cout << "Deleting " << cursor->getAmino().aminoAcid << endl;
-            // cursor->~Node();
-            delete cursor;
-            // if (cursor == nullptr) {
-            //     cout << "Deleted successfully" << endl;
-            // } else {
-            //     cout << "not deleted for whatever reason" << endl;
-            // }
+            cout << "Deleting " << cursor->getAmino().aminoAcid << endl;
+            cursor->~Node();
+            // delete cursor;
+            if (cursor == nullptr) {
+                cout << "Deleted successfully" << endl;
+            } else {
+                cout << "not deleted for whatever reason" << endl;
+            }
         }
         sequences.pop_back();
     }
