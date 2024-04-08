@@ -19,29 +19,35 @@ class Node {
     private:
         genePosition gene;
         bool gen;
-        string aminoAcid;
+        AminoCodon acPair;
         Node* next;
     public:
         Node() {
             gene.startIndex = 0;
             gene.endIndex = 0;
             gen = false;
-            aminoAcid = "";
+            acPair.aminoAcid = "";
+            acPair.codon = "";
+            acPair.startCodon = false;
+            acPair.terminationCodon = false;
             next = nullptr;
         }
 
         Node(genePosition geen) {
             gene = geen;
             gen = true;
-            aminoAcid = "";
+            acPair.aminoAcid = "";
+            acPair.codon = "";
+            acPair.startCodon = false;
+            acPair.terminationCodon = false;
             next = nullptr;
         }
 
-        Node(string acid) {
+        Node(AminoCodon acPair) {
             gene.startIndex = 0;
             gene.endIndex = 0;
             gen = false;
-            aminoAcid = acid;
+            this->acPair = acPair;
             next = nullptr;
         }
 
@@ -64,12 +70,12 @@ class Node {
             return gen;
         }
 
-        string getAmino(void) {
-            return aminoAcid;
+        AminoCodon getAmino(void) {
+            return acPair;
         }
 
-        void setAmino(string acid) {
-            aminoAcid = acid;
+        void setAmino(AminoCodon acPair) {
+            this->acPair = acPair;
         }
 
         Node* getNext(void) {
@@ -124,7 +130,13 @@ int main(void) {
     Node* peptides = peptideSynthesis(preAmino.rna, preAmino.rna.length(), head);
     Node* cursor;
     for (cursor = peptides; cursor; cursor = cursor->getNext()) {
-        cout << cursor->getAmino() << endl;
+        if (cursor->getAmino().startCodon) {
+            cout << "Start amino: " << cursor->getAmino().aminoAcid << endl;
+        } else if (cursor->getAmino().terminationCodon) {
+            cout << "Termination codon: " << cursor->getAmino().aminoAcid << endl;
+        } else {
+            cout << "regular codon: " << cursor->getAmino().aminoAcid << endl;
+        }
     }
 
     return 0;
@@ -300,11 +312,11 @@ Node* peptideSynthesis(string matureRna, int length, CodonTree* head) {
 
     for (int i = 0; i < length; i++) {
         if ((i % 3 == 0) && (i != 0)) {
-            if (cursor->getAmino() == "") {
-                string amino = head->getAminoCodon(codon, head);
+            if (cursor->getAmino().aminoAcid == "") {
+                AminoCodon amino = head->getAminoCodon(codon, head);
                 cursor->setAmino(amino);
             } else {
-                string amino = head->getAminoCodon(codon, head);
+                AminoCodon amino = head->getAminoCodon(codon, head);
                 Node* next = new Node(amino);
                 cursor->setNext(next);
                 cursor = cursor->getNext();

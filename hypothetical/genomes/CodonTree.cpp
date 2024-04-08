@@ -88,13 +88,13 @@ bool CodonTree::isG() {
     return nucG;
 }
 
-bool CodonTree::setAcid(std::string acid) {
-    aminoAcid = acid;
+bool CodonTree::setAcid(AminoCodon acPair) {
+    this->acPair = acPair;
     return true;
 }
 
-string CodonTree::getAcid(void) {
-    return aminoAcid;
+AminoCodon CodonTree::getAcid(void) {
+    return acPair;
 }
 
 /*
@@ -115,7 +115,13 @@ CodonTree::CodonTree() {
     nucA = false;
     setG(nullptr);
     nucG = false;
-    setAcid("");
+
+    AminoCodon render;
+    render.aminoAcid = "";
+    render.codon = "";
+    render.startCodon = false;
+    render.terminationCodon = false;
+    setAcid(render);
 }
 
 //parent is the parent of this node and int is the nucleotide
@@ -126,7 +132,14 @@ CodonTree::CodonTree(CodonTree* parent, int nucleotide) {
     setC(nullptr);
     setA(nullptr);
     setG(nullptr);
-    setAcid("");
+
+    AminoCodon render;
+    render.aminoAcid = "";
+    render.codon = "";
+    render.startCodon = false;
+    render.terminationCodon = false;
+    setAcid(render);
+
     if (nucleotide == 1) {
         nucU = true;
     } else if (nucleotide == 2) {
@@ -138,13 +151,13 @@ CodonTree::CodonTree(CodonTree* parent, int nucleotide) {
     }
 }
 
-CodonTree::CodonTree(CodonTree* parent, int nucleotide, std::string acid) {
+CodonTree::CodonTree(CodonTree* parent, int nucleotide, AminoCodon acPair) {
     setParent(parent);
     setU(nullptr);
     setC(nullptr);
     setA(nullptr);
     setG(nullptr);
-    setAcid(acid);
+    setAcid(acPair);
     if (nucleotide == 1) {
         nucU = true;
     } else if (nucleotide == 2) {
@@ -180,7 +193,7 @@ void CodonTree::addAminoCodon(CodonTree* cursor, AminoCodon acPair, int index) {
         #ifdef DEBUG
         cout << "Setting amino acid to: " << acPair.aminoAcid << endl;
         #endif
-        cursor->setAcid(acPair.aminoAcid);
+        cursor->setAcid(acPair);
     } else if (acPair.codon[index + 1] == 'u') {
         if (cursor->getU() != nullptr) {
             #ifdef DEBUG
@@ -250,14 +263,14 @@ void CodonTree::displayTree(CodonTree* head, CodonTree* cursor, char step, std::
             displayTree(head, cursor->getC(), 'c', path);
             displayTree(head, cursor->getA(), 'a', path);
             displayTree(head, cursor->getG(), 'g', path);
-            if (cursor->getAcid() != "") {
-                cout << "Amino acid: " << cursor->getAcid() << endl;
+            if (cursor->getAcid().aminoAcid != "") {
+                cout << "Amino acid: " << cursor->getAcid().aminoAcid << endl;
                 cout << "Path: " << path << endl;
             }
     }
 }
 
-string CodonTree::getAminoCodon(string codon, CodonTree* cursor) {
+AminoCodon CodonTree::getAminoCodon(string codon, CodonTree* cursor) {
     for (int index = -1; true; index++) {
         if (codon[index + 1] == 'u') {
             if (cursor->getU() != nullptr) {
@@ -279,4 +292,5 @@ string CodonTree::getAminoCodon(string codon, CodonTree* cursor) {
             return cursor->getAcid();
         }
     }
+    return cursor->getAcid();
 }
