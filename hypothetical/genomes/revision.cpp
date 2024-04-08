@@ -110,7 +110,7 @@ vector<Node*> peptideSynthesis(string matureRna, int length, CodonTree* head);
 int main(void) {
     //takes a genetic sequence and returns the mRNA sequence with the introns excised and compares the original mRNA to 
     //the solely exon mRNA
-    string sequence = "cgagcacatcactaatataattggcgagggtccatctgataattgttgttgagttctgctaattgtcctcctcaatcgtccttcaagatcaattacgtccgatttctgtagagtcctgaatccaattaatcccgacttcggcggagattttcgtattgtttctgaaatcccttcaatgccttagatactagaaactgccttgatgcaatagtagtattgacagtatgtgccttgcaacttgtccttagaaccaacttgtaatggaacattcaaaccctgacgctacggcctactgaaagggaggaatatcgctgtaatgtttgtcccctactaagggaatgaccccgctccgcggttcccgtaaaccagtagacggcgcgtaccgaggtagtgctagatgtgacgcacaggcaccaacaactatataggttccattggatacgggtcagaccctcaatcagacatgatttggatccaccagtcaatctcggccgtgtatgacctactgtgtacactactggttagtaatttcatcagcaggagactcctatttcgtgtagcgtgtttgtttattgtcttatgcattcgtacaggcgatcatttactagaggcccttcacccagagttatggacgcaccgcgcgtatatcgagcgggatacacttgcggctgatggtcagcataatctttgggatgctatggctcgaatcgccttgcgaacagaatctgctgttttcaactgacatatcacctagaagagccccggtagctgtcccccgacgtgatgctcgaacttgatttcagtggggatcgattcttagtggaaggtcctactaatagcccacgtggacttgaacgagtcctatcatccatcaagagggggcgaatacctcacatagtgagcgtacggcatgttatacgaattgtaattgagctacgccccccgcgcaccgctatatatcttgccgcggagtgccaagcattcgtcccgtgaagtacccgcgttaaactatgtagggaagaaggccggcacccgtgtattcacgtcctcttcgaatcgcaaattgtaccttaattggttcattgaaaaacagttgaatgtgaaaatcgtaatgtgatgtactgttctcgctgacggtgatcgactgacccacggtaagatacacgattgattcttgccccggagacccttgtgttctccgccttctactatctcatgtagcacctgggcacgatggtggaccgcgctacagagaccaggggggcggtcctcgcgtgctggtcgtccgaccggcgaaagacctgaaagatttgtaggggttctaatatgtcaataactgatcgcgtgccaggcggtggaagctagtttaaggagcgtacgaccacgctagattactttgtagcgtaaattattatcgccaaccttattacccctagaccgtctagtagaacttagtttgaattccctggcgagtggtgtctagttttgttacatagtactcaacagtcgtcgacgttagggtcgcgtctcgaaagtttgttaccctttgacccgtcatcctagtataagatcttccagctagggtgtctgcgcgactcttgttgagatattactattccatgtgcttttgttagatcaagggctctaatccattgaggagattgaacgtggatttcattgagagagacctgtgttagtgtttgtgtagcacttaatgagggtgttgcggggcgcacaatccataaacacagataggtagctgcctatttgaccacggtgcgaactgtactggttcgccgcggaggtcccctagtgcagctcctgcgcgtcacctcgcaaacagattcctgcgtgaccacgacggtcttgttttacgccttatgacggtgatgcccccttgcaaatacgattaagggagagcggtgcggcccaagcctgcgagcgtgctcagagtatcagcacaacttgtgccccgccatggcgtgacgcccgcaggctttgctctctcgtcacgcgtcaagaacaaacaggcgtcgaacagttctttttccgcggtaagactgtcaaatagccatcgccatcaggcagaccaccatccgcgtcgtagaaataccagggatacgtttcttcttaacgtaattgtcgcttcgcggcaatagaactttgtgcgttcggacagtccgcgagacacgttttggaagtaggcgctatctgatttgtagaagagaagtacacaaccggccgcaggcccaacaggggtggcgtcgcgaagtcagtcgatcttcgccgcgaatcaaagtcccttaatagagaaaggagacttacgctgatttgtcgcgagcaagcagggaaatacgttcaatcaggttaggcatggagcttccgcggggttgccccccaccctccaaggcgggtgcggtttaaaaaaaccgtgcacggtataaaggtgcctgtaagcacacagtctgttctctacttgatcttcagctggaagtgaaagaaagtgaattctcagtcgtagggggtaaataggatcgcccggagcttatagtcgaggtgactcggtggcaacgatgatagatatcgacgtaatagtccctgtgcaatgatttgcttcctgggctggacgaatcactttgtccgatgagcttccgcaattaccgcgacgtctggcagtaagtgtacggtacggcgtgtgaaccaatcgtatgtaacatctgatatcgatcgttaatatcttatgccctggctgttcacctgcgagccagtacttcataactgccgataaatagcatcctgagtaatagagtattgtgatttgtgacttggtgaaaggtttccgatggggaagaaaagtttgaacgtacccgccacgtcaagcactgcagtctgccccggggtgcagagatgccacgaacgtcctattcgttctgaccgatgccaagtgaagaggtccctgcgaacctgagaggaggaaaatgaaaaagcgtgcttacaatt";
+    string sequence = "gggctcctgctcgttctcacggtatgcatagggcagctatactcaagtataattcaaccacacattgatgagacgttgtcgtacttctgctgaatgctatgaaagtgagcgatcgtggaatattgagcgcgacccgagtctggcctcggcataggcgcgaggaaaggtagtgttgggcggccgttaataaccttcgaccgaccatcttcattccgaatttctggtgagtttagtcaggtcgaccgtcccctggatgagccctatcgttccatcatgatctaccagtcgtactatggatgtatagaaatacataaaaagtatagtcctcacatgacggcacggaccacgaactgaataaacggtgttgtctcgttggaaatgttttcggccgtcacgtcgataacatgtttcaagagtcctcagtcttaccctggtatgcgttcagtattcgatgggtaggcaagagtcccgttaattggataaatgatggggacaaaatgtttaaaccatactaatttgggactgcaaaaattatgtgcaaaactacgagtcgtttttcctcagcgtctaaccctgggggcttgacaagattctctacccccgtcgacgaataaaatggggtgttaggcacttgagtatcccagagcatctattgacagtgagagccgcacggaatgctgcacgagaagctgccgcaacggcaactagctgaatccacgacgcttctcagaaaattgagtaggtcgggaagaattctggattcgctattttcagtctcgtgctagcgcgataaattgtaacatggactgctataaagcggaagaaaattccatctttgctctaacttatccctgctatctggagtcctcggatgttagggttgtcccatcatttacattctaatgatcctggtaagtgagatgcatgtggtatctagtgagctaaaacagtcgcgcactttgttgctagtcaatgcgtaaaccagcagacattatgtagc";
     string rnaSequence = dnaTOrna(sequence, sequence.length());
     Node* output = examine(rnaSequence, rnaSequence.length());
     rnaAndExcision preAmino = matureRNA(rnaSequence, rnaSequence.length(), output);
@@ -129,22 +129,18 @@ int main(void) {
 
     //this isn't working right now
     vector<Node*> peptides = peptideSynthesis(preAmino.rna, preAmino.rna.length(), head);
-
     Node* cursor;
     int index = 0;
-    cout << peptides.size() << endl;
-    for (cursor = peptides[index]; cursor;) {
-        if (cursor->getAmino().startCodon) {
-            cout << "Start amino: " << cursor->getAmino().aminoAcid << endl;
-            cursor = cursor->getNext();
-        } else if (cursor->getAmino().terminationCodon) {
-            cout << "Termination codon: " << cursor->getAmino().aminoAcid << endl << endl;
-            index++;
-            cursor = peptides[index];
-        } else {
-            cout << "regular codon: " << cursor->getAmino().aminoAcid << endl;
-        }
-    }
+    cout << peptides[5]->getAmino().aminoAcid << endl;
+    // for (cursor = peptides[index]; cursor; cursor = cursor->getNext()) {
+    //     if (cursor->getAmino().startCodon) {
+    //         cout << "Start amino: " << cursor->getAmino().aminoAcid << endl;
+    //     } else if (cursor->getAmino().terminationCodon) {
+    //         cout << "Termination codon: " << cursor->getAmino().aminoAcid << endl;
+    //     } //else {
+    //     //     cout << "regular codon: " << cursor->getAmino().aminoAcid << endl;
+    //     // }
+    // }
 
     return 0;
 }
@@ -323,20 +319,30 @@ vector<Node*> peptideSynthesis(string matureRna, int length, CodonTree* head) {
     for (int i = 0; i < length; i++) {
         if ((i % 3 == 0) && (i != 0)) {
             AminoCodon amino = head->getAminoCodon(codon, head);
-            if (amino.startCodon) {
-                cout << "Start acid: " << amino.aminoAcid << endl;
-            } else if (amino.terminationCodon) {
-                cout << "Terminating acid: " << amino.aminoAcid << endl;
-            }
             if (amino.startCodon && (cursor->getAmino().aminoAcid == "") && !start) {
+                cout << "Cursor is: " << cursor->getAmino().aminoAcid << endl;
+                cout << "Setting cursor to: " << amino.aminoAcid << endl;
+                cout << "Starting acid: " << amino.startCodon << endl;
+                cout << "Terminating acid: " << amino.terminationCodon << endl;
+                cout << 0 << endl;
                 cursor->setAmino(amino);
                 start = true;
             } else if (amino.startCodon && (cursor->getAmino().aminoAcid != "") && !start) {
+                cout << "Cursor is: " << cursor->getAmino().aminoAcid << endl;
+                cout << "Setting cursor to: " << amino.aminoAcid << endl;
+                cout << "Starting acid: " << amino.startCodon << endl;
+                cout << "Terminating acid: " << amino.terminationCodon << endl;
+                cout << 1 << endl;
                 Node* next = new Node(amino);
                 cursor->setNext(next);
                 cursor = cursor->getNext();
                 start = true;
             } else if (amino.terminationCodon && (cursor->getAmino().aminoAcid == "") && start) {
+                cout << "Cursor is: " << cursor->getAmino().aminoAcid << endl;
+                cout << "Setting cursor to: " << amino.aminoAcid << endl;
+                cout << "Starting acid: " << amino.startCodon << endl;
+                cout << "Terminating acid: " << amino.terminationCodon << endl;
+                cout << 2 << endl;
                 cursor->setAmino(amino);
 
                 Node* increment = new Node();
@@ -344,14 +350,26 @@ vector<Node*> peptideSynthesis(string matureRna, int length, CodonTree* head) {
                 cursor = increment;
                 start = false;
             } else if (amino.terminationCodon && (cursor->getAmino().aminoAcid != "") && start) {
+                cout << "Cursor is: " << cursor->getAmino().aminoAcid << endl;
+                cout << "Setting cursor to: " << amino.aminoAcid << endl;
+                cout << "Starting acid: " << amino.startCodon << endl;
+                cout << "Terminating acid: " << amino.terminationCodon << endl;
+                cout << 3 << endl;
                 Node* next = new Node(amino);
+                cout << 'a' << endl;
                 cursor->setNext(next);
 
+                cout << 'b' << endl;
                 Node* increment = new Node();
+                cout << 'c' << endl;
                 sequences.push_back(increment);
+                cout << 'd' << endl;
                 cursor = increment;
+                cout << 'e' << endl;
                 start = false;
+                cout << 'f' << endl;
             }
+            cout << 'g' << endl;
             codon = matureRna[i];
         } else {
             codon += matureRna[i];
