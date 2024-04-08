@@ -140,7 +140,7 @@ Node* examine(string sequence, int length) {
 
     for (int i = 0; i < length; i++)
     {
-        if (!start && (sequence[i] == 'g') && (sequence[i+1] == 'u') && (i < (length - 1)) && (i != genCur.endIndex)) { //hey
+        if (!start && (sequence[i] == 'g') && (sequence[i+1] == 'u') && (i < (length - 1)) && (i != genCur.endIndex)) {
             start = true;
             genCur.startIndex = i;
         } else if (start && (sequence[i] == 'a') && (sequence[i+1] == 'g') && (i < (length - 1)) && (i != genCur.startIndex)) {
