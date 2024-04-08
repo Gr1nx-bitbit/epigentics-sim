@@ -62,9 +62,27 @@ class Node {
             end = nullptr;
         }
 
-        ~Node() {
-            delete this;
-        }
+        // ~Node() {
+        //     if (end && parent && next) {
+        //         Node* p = getParent();
+        //         p->setNext(getNext());
+        //         p->setEnd(getEnd());
+        //         parent = nullptr;
+        //         next = nullptr;
+        //         end = nullptr;
+        //         delete this;
+        //     } else if (!parent && next && end) {
+        //         Node* n = getNext();
+        //         n->setEnd(getEnd());
+        //         next = nullptr;
+        //         end = nullptr;
+        //         delete this;
+        //     } else if (parent && next && !end) {
+        //         Node* p = getParent();
+        //         p->setNext(getNext());
+        //         delete this;
+        //     }
+        // }
 
         genePosition getGene(void) {
             return gene;
@@ -161,22 +179,24 @@ int main(void) {
     cout << "Peptides size: " << peptides.size() << endl;
     #endif
 
-    // for (cursor = peptides[index]; cursor;) {
-    //     if (cursor->getAmino().startCodon) {
-    //         cout << "Start amino: " << cursor->getAmino().aminoAcid << endl;
-    //         cursor = cursor->getNext();
-    //     } else if (cursor->getAmino().terminationCodon) {
-    //         cout << "Termination codon: " << cursor->getAmino().aminoAcid << endl << endl;
-    //         index++;
-    //         cursor = peptides[index];
-    //     } else {
-    //         cout << "regular codon: " << cursor->getAmino().aminoAcid << endl;
-    //         cursor = cursor->getNext();
-    //     }
-    // }
+    for (cursor = peptides[index]; cursor;) {
+        if (cursor->getAmino().startCodon) {
+            cout << "Start amino: " << cursor->getAmino().aminoAcid << endl;
+            cursor = cursor->getNext();
+        } else if (cursor->getAmino().terminationCodon) {
+            cout << "Termination codon: " << cursor->getAmino().aminoAcid << endl << endl;
+            index++;
+            cursor = peptides[index];
+        } else {
+            if (cursor->getAmino().aminoAcid != "")
+            cout << "regular codon: " << cursor->getAmino().aminoAcid << endl;
+            
+            cursor = cursor->getNext();
+        }
+    }
 
     cout << "Peptides size: " << peptides.size() << endl;
-    cout << peptides[4]->getAmino().aminoAcid << endl;
+    //cout << peptides[4]->getAmino().aminoAcid << endl;
 
     return 0;
 }
@@ -433,17 +453,27 @@ vector<Node*> peptideSynthesis(string matureRna, int length, CodonTree* head) {
 
     //this deletes the acPair but not the whole thing for some reason. 
     //I should probably just make a destructor for the node!
+    //that results in a segmentation fault :(
     if (!sequences[index]->getEnd()->getAmino().terminationCodon) {
-        cout << "Going to delete " << index << " sequence!" << endl;
-        for (cursor = sequences[index]->getEnd(); cursor; cursor = cursor->getParent()) {
+        for (cursor = sequences[index]->getEnd(); cursor;) {
+            #ifdef DEBUG
             cout << "Deleting " << cursor->getAmino().aminoAcid << endl;
-            cursor->~Node();
-            // delete cursor;
-            if (cursor == nullptr) {
-                cout << "Deleted successfully" << endl;
+            cout << cursor->getAmino().aminoAcid << endl;
+            #endif
+
+            Node* last = cursor;
+            cursor = cursor->getParent();
+            delete last;
+            last = nullptr;
+
+            #ifdef DEBUG
+            if (last == nullptr) {
+                cout << "Deleted successfully" << endl << endl;
             } else {
-                cout << "not deleted for whatever reason" << endl;
+                cout << "Proof: " << last->getAmino().aminoAcid << endl;
+                cout << "not deleted for whatever reason" << endl << endl;
             }
+            #endif
         }
         sequences.pop_back();
     }
