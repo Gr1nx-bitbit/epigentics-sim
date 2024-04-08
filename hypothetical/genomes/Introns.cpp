@@ -103,7 +103,7 @@ Node* peptideSynthesis(string matureRna, int length, CodonTree* head);
 int main(void) {
     //takes a genetic sequence and returns the mRNA sequence with the introns excised and compares the original mRNA to 
     //the solely exon mRNA
-    string sequence = "agggaatactggtcaagaggttagggcgcaccgtccgtcggacatgacacctgtagagctatgtagtgtacggtatcgatgcagggcagggcggtgcgta";
+    string sequence = "caggaatactggtcaagaggttagggcgcaccgtccgtcggacatgacacctgtagagctatgtagtgtacggtatcgatgcagggcagggcggtgcgta";
     string rnaSequence = dnaTOrna(sequence, sequence.length());
     Node* output = examine(rnaSequence, rnaSequence.length());
     rnaAndExcision preAmino = matureRNA(rnaSequence, rnaSequence.length(), output);
@@ -135,13 +135,15 @@ Node* examine(string sequence, int length) {
    Node* head = new Node();
    Node* cursor = head;
    genePosition genCur;
+   genCur.startIndex = -1;
+   genCur.endIndex = -1;
 
     for (int i = 0; i < length; i++)
     {
-        if (!start && (sequence[i] == 'g') && (sequence[i+1] == 'u') && (i < (length - 1))) {
+        if (!start && (sequence[i] == 'g') && (sequence[i+1] == 'u') && (i < (length - 1)) && (i != genCur.endIndex)) {
             start = true;
             genCur.startIndex = i;
-        } else if (start && (sequence[i] == 'a') && (sequence[i+1] == 'g') && (i < (length - 1))) {
+        } else if (start && (sequence[i] == 'a') && (sequence[i+1] == 'g') && (i < (length - 1)) && (i != genCur.startIndex)) {
             genCur.endIndex = i+1;
             if (!cursor->isGene()) {
                 cursor->setGene(genCur);
