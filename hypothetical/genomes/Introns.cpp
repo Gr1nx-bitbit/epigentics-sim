@@ -5,6 +5,8 @@
 #include <vector>
 using namespace std;
 
+//#define DEBUG
+
 struct genePosition {
     int startIndex;
     int endIndex;
@@ -22,6 +24,8 @@ class Node {
         bool gen;
         AminoCodon acPair;
         Node* next;
+        Node* parent;
+        Node* end;
     public:
         Node() {
             gene.startIndex = 0;
@@ -32,6 +36,8 @@ class Node {
             acPair.startCodon = false;
             acPair.terminationCodon = false;
             next = nullptr;
+            parent = nullptr;
+            end = nullptr;
         }
 
         Node(genePosition geen) {
@@ -42,6 +48,8 @@ class Node {
             acPair.startCodon = false;
             acPair.terminationCodon = false;
             next = nullptr;
+            parent = nullptr;
+            end = nullptr;
         }
 
         Node(AminoCodon acPair) {
@@ -50,13 +58,22 @@ class Node {
             gen = false;
             this->acPair = acPair;
             next = nullptr;
+            parent = nullptr;
+            end = nullptr;
         }
 
-        // Node(genePosition geen, Node* nxt) {
-        //     gene = geen;
-        //     isGene = true;
-        //     next = nxt;
-        // }
+        ~Node() {
+            gene.startIndex = 0;
+            gene.endIndex = 0;
+            gen = false;
+            acPair.aminoAcid = "";
+            acPair.codon = "";
+            acPair.startCodon = false;
+            acPair.terminationCodon = false;
+            delete next;
+            parent = nullptr;
+            end = nullptr;
+        }
 
         genePosition getGene(void) {
             return gene;
@@ -85,6 +102,22 @@ class Node {
 
         void setNext(Node* nxt) {
             next = nxt;
+        }
+
+        Node* getParent(void) {
+            return parent;
+        }
+
+        void setParent(Node* parent) {
+            this->parent = parent;
+        }
+
+        Node* getEnd(void) {
+            return end;
+        }
+
+        void setEnd(Node* end) {
+            this->end = end;
         }
 };
 
@@ -132,19 +165,27 @@ int main(void) {
 
     Node* cursor;
     int index = 0;
-    cout << peptides.size() << endl;
-    for (cursor = peptides[index]; cursor;) {
-        if (cursor->getAmino().startCodon) {
-            cout << "Start amino: " << cursor->getAmino().aminoAcid << endl;
-            cursor = cursor->getNext();
-        } else if (cursor->getAmino().terminationCodon) {
-            cout << "Termination codon: " << cursor->getAmino().aminoAcid << endl << endl;
-            index++;
-            cursor = peptides[index];
-        } else {
-            cout << "regular codon: " << cursor->getAmino().aminoAcid << endl;
-        }
-    }
+
+    #ifdef DEBUG
+    cout << "Peptides size: " << peptides.size() << endl;
+    #endif
+
+    // for (cursor = peptides[index]; cursor;) {
+    //     if (cursor->getAmino().startCodon) {
+    //         cout << "Start amino: " << cursor->getAmino().aminoAcid << endl;
+    //         cursor = cursor->getNext();
+    //     } else if (cursor->getAmino().terminationCodon) {
+    //         cout << "Termination codon: " << cursor->getAmino().aminoAcid << endl << endl;
+    //         index++;
+    //         cursor = peptides[index];
+    //     } else {
+    //         cout << "regular codon: " << cursor->getAmino().aminoAcid << endl;
+    //         cursor = cursor->getNext();
+    //     }
+    // }
+
+    cout << "Peptides size: " << peptides.size() << endl;
+    cout << peptides[4]->getAmino().aminoAcid << endl;
 
     return 0;
 }
@@ -319,25 +360,41 @@ vector<Node*> peptideSynthesis(string matureRna, int length, CodonTree* head) {
     Node* cursor = sequences[0];
     string codon = "";
     bool start = false;
+    int index = 0;
 
     for (int i = 0; i < length; i++) {
+
         if ((i % 3 == 0) && (i != 0)) {
             AminoCodon amino = head->getAminoCodon(codon, head);
+
+            #ifdef DEBUG
             if (amino.startCodon) {
                 cout << "Start acid: " << amino.aminoAcid << endl;
             } else if (amino.terminationCodon) {
                 cout << "Terminating acid: " << amino.aminoAcid << endl;
             }
+            #endif
+
             if (amino.startCodon && (cursor->getAmino().aminoAcid == "") && !start) {
                 cursor->setAmino(amino);
                 start = true;
+
+                if ((length - i) < 3) {
+                    sequences[index]->setEnd(cursor);
+                }
             } else if (amino.startCodon && (cursor->getAmino().aminoAcid != "") && !start) {
                 Node* next = new Node(amino);
+                next->setParent(cursor);
                 cursor->setNext(next);
                 cursor = cursor->getNext();
                 start = true;
+
+                if ((length - i) < 3) {
+                    sequences[index]->setEnd(cursor);
+                }
             } else if (amino.terminationCodon && (cursor->getAmino().aminoAcid == "") && start) {
                 cursor->setAmino(amino);
+                sequences[index]->setEnd(cursor);
 
                 Node* increment = new Node();
                 sequences.push_back(increment);
@@ -345,17 +402,59 @@ vector<Node*> peptideSynthesis(string matureRna, int length, CodonTree* head) {
                 start = false;
             } else if (amino.terminationCodon && (cursor->getAmino().aminoAcid != "") && start) {
                 Node* next = new Node(amino);
+                next->setParent(cursor);
                 cursor->setNext(next);
+                sequences[index]->setEnd(cursor->getNext());
 
                 Node* increment = new Node();
                 sequences.push_back(increment);
                 cursor = increment;
                 start = false;
+            } else if (!amino.startCodon && !amino.terminationCodon && start && (cursor->getAmino().aminoAcid == "")) {
+                cursor->setAmino(amino);
+
+                //need to check if this is the last codon in the matureRNA
+                if ((length - i) < 3) {
+                    sequences[index]->setEnd(cursor);
+                }
+            } else if (!amino.startCodon && !amino.terminationCodon && start && (cursor->getAmino().aminoAcid != "")) {
+                Node* next = new Node(amino);
+                next->setParent(cursor);
+                cursor->setNext(next);
+                cursor = cursor->getNext();
+
+                if ((length - i) < 3) {
+                    sequences[index]->setEnd(cursor);
+                }
             }
             codon = matureRna[i];
         } else {
             codon += matureRna[i];
         }
+    }
+
+    //only the last sequence has a chance at having no termination codon. 
+    //Since peptide sequences can get into the tens of thousands, I'd rather 
+    //add a last member variale to Node so we can instantly look at whether 
+    //or not the sequence is terminated with an end codon and therefore free it
+    //instead of looping through it twice and getting worse performance.
+    //If the end node is not a termination codon then erase the sequence
+
+    //this deletes the acPair but not the whole thing for some reason. 
+    //I should probably just make a destructor for the node!
+    if (!sequences[index]->getEnd()->getAmino().terminationCodon) {
+        //cout << "Going to delete " << index << " sequence!" << endl;
+        for (cursor = sequences[index]->getEnd(); cursor; cursor = cursor->getParent()) {
+            // cout << "Deleting " << cursor->getAmino().aminoAcid << endl;
+            // cursor->~Node();
+            delete cursor;
+            // if (cursor == nullptr) {
+            //     cout << "Deleted successfully" << endl;
+            // } else {
+            //     cout << "not deleted for whatever reason" << endl;
+            // }
+        }
+        sequences.pop_back();
     }
 
     return sequences;
