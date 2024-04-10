@@ -6,6 +6,7 @@
 struct AminoCodon {
     std::string aminoAcid;
     std::string codon;
+    std::string abbreviation;
     bool startCodon;
     bool terminationCodon;
 };

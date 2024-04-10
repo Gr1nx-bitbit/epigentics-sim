@@ -1,64 +1,64 @@
-uuu : Phenylalanine
-uuc : Phenylalanine
-uua : Leucine
-uug : Leucine
-ucu : Serine
-ucc : Serine
-uca : Serine
-ucg : Serine
-uau : Tyrosine
-uac : Tyrosine
-uaa : /Ochre
-uag : /Amber
-ugu : Cysteine
-ugc : Cysteine
-uga : /Opal|Umber
-ugg : Tryptophan
-cuu : Leucine
-cuc : Leucine
-cua : Leucine
-cug : Leucine
-ccu : Proline
-ccc : Proline
-cca : Proline
-ccg : Proline
-cau : Histidine
-cac : Histidine
-caa : Glutamine
-cag : Glutamine
-cgu : Arginine
-cgc : Arginine
-cga : Arginine
-cgg : Arginine
-auu : Isoleucine
-auc : Isoleucine
-aua : Isoleucine
-aug : !Methionine
-acu : Threonine
-acc : Threonine
-aca : Threonine
-acg : Threonine
-aau : Asparagine
-aac : Asparagine
-aaa : Lysine
-aag : Lysine
-agu : Serine
-agc : Serine
-aga : Arginine
-agg : Arginine
-guu : Valine
-guc : Valine
-gua : Valine
-gug : Valine
-gcu : Alanine
-gcc : Alanine
-gca : Alanine
-gcg : Alanine
-gau : Aspartate
-gac : Aspartate
-gaa : Glutamate
-gag : Glutamate
-ggu : Glycine
-ggc : Glycine
-gga : Glycine
-ggg : Glycine
+uuu : Phenylalanine ; F
+uuc : Phenylalanine ; F
+uua : Leucine ; L
+uug : Leucine ; L
+ucu : Serine ; S
+ucc : Serine ; S
+uca : Serine ; S
+ucg : Serine ; S
+uau : Tyrosine ; Y
+uac : Tyrosine ; Y
+uaa : /Ochre ; X
+uag : /Amber ; X
+ugu : Cysteine ; C
+ugc : Cysteine ; C
+uga : /Opal|Umber ; X
+ugg : Tryptophan ; W
+cuu : Leucine ; L
+cuc : Leucine ; L
+cua : Leucine ; L
+cug : Leucine ; L
+ccu : Proline ; P
+ccc : Proline ; P
+cca : Proline ; P
+ccg : Proline ; P
+cau : Histidine ; H
+cac : Histidine ; H
+caa : Glutamine ; Q
+cag : Glutamine ; Q
+cgu : Arginine ; R
+cgc : Arginine ; R
+cga : Arginine ; R
+cgg : Arginine ; R
+auu : Isoleucine ; I
+auc : Isoleucine ; I
+aua : Isoleucine ; I
+aug : !Methionine ; M
+acu : Threonine ; T
+acc : Threonine ; T
+aca : Threonine ; T
+acg : Threonine ; T
+aau : Asparagine ; N
+aac : Asparagine ; N
+aaa : Lysine ; K
+aag : Lysine ; K
+agu : Serine ; S
+agc : Serine ; S
+aga : Arginine ; R
+agg : Arginine ; R
+guu : Valine ; V
+guc : Valine ; V
+gua : Valine ; V
+gug : Valine ; V
+gcu : Alanine ; A
+gcc : Alanine ; A
+gca : Alanine ; A
+gcg : Alanine ; A
+gau : Aspartate ; D
+gac : Aspartate ; D
+gaa : Glutamate ; E
+gag : Glutamate ; E
+ggu : Glycine ; G
+ggc : Glycine ; G
+gga : Glycine ; G
+ggg : Glycine ; G

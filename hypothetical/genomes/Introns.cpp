@@ -177,8 +177,9 @@ int main(void) {
 
     #ifdef DEBUG
     cout << "Peptides size: " << peptides.size() << endl;
-    #endif
+    
 
+    
     for (cursor = peptides[index]; cursor;) {
         if (cursor->getAmino().startCodon) {
             cout << "Start amino: " << cursor->getAmino().aminoAcid << endl;
@@ -196,6 +197,8 @@ int main(void) {
     }
 
     cout << "Peptides size: " << peptides.size() << endl;
+    #endif
+    
     //head->~CodonTree();
     //cout << peptides[4]->getAmino().aminoAcid << endl;
 
@@ -338,14 +341,21 @@ string dnaTOrna(string dna, int length) {
 
 AminoCodon parse(string input) {
     bool colon = false;
+    bool semiColon = false;
     AminoCodon tmp;
     tmp.startCodon = false;
     tmp.terminationCodon = false;
     for (int index = 0; index < input.length(); index++) {
         if (input[index] == ':') {
             colon = true;            
+        } else if (input[index] == ';') {
+            semiColon = true;
         } else if (!colon && input[index] != ' ') {
             tmp.codon += input[index];
+        } else if (semiColon) {
+            if (input[index] != ' ') {
+                tmp.abbreviation += input[index];
+            }
         } else {
             if (input[index] == '!') {
                 tmp.startCodon = true;
@@ -354,12 +364,14 @@ AminoCodon parse(string input) {
                 tmp.terminationCodon = true;
                 tmp.startCodon = false;
             } else {
-                tmp.aminoAcid += input[index];
+                if (input[index] != ' ') {
+                    tmp.aminoAcid += input[index];
+                }
             }
         }
     }
 
-return tmp;
+    return tmp;
 }
 
 //takes in a string matureRNA and converts it into a string of

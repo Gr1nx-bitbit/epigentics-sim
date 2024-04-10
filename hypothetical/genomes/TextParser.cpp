@@ -21,8 +21,10 @@ int main(int argC, char* argV[]) {
     for (int i = 0; i < output.size(); i++) {
         if (output[i].startCodon) { 
             cout << "Start amino acid: " << output[i].aminoAcid << endl;
+            cout << "Abrreviation: " << output[i].abbreviation << endl;
         } else if (output[i].terminationCodon) {
             cout << "Termination acid: " << output[i].aminoAcid << endl;
+            cout << "Abrreviation: " << output[i].abbreviation << endl;
         }
     }
 
@@ -34,14 +36,21 @@ int main(int argC, char* argV[]) {
 //the pair in a AminoCodon
 AminoCodon parse(string input) {
     bool colon = false;
+    bool semiColon = false;
     AminoCodon tmp;
     tmp.startCodon = false;
     tmp.terminationCodon = false;
     for (int index = 0; index < input.length(); index++) {
         if (input[index] == ':') {
             colon = true;            
+        } else if (input[index] == ';') {
+            semiColon = true;
         } else if (!colon && input[index] != ' ') {
             tmp.codon += input[index];
+        } else if (semiColon) {
+            if (input[index] != ' ') {
+                tmp.abbreviation += input[index];
+            }
         } else {
             if (input[index] == '!') {
                 tmp.startCodon = true;
@@ -50,7 +59,9 @@ AminoCodon parse(string input) {
                 tmp.terminationCodon = true;
                 tmp.startCodon = false;
             } else {
-                tmp.aminoAcid += input[index];
+                if (input[index] != ' ') {
+                    tmp.aminoAcid += input[index];
+                }
             }
         }
     }
