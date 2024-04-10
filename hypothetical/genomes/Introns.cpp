@@ -142,6 +142,7 @@ void compare(string premature, int length, rnaAndExcision preAmino);
 string dnaTOrna(string dna, int length);
 AminoCodon parse(string input);
 vector<Node*> peptideSynthesis(string matureRna, int length, CodonTree* head);
+void displayAbbreviations(Node* root);
 
 /*
 ––––––––––––––––––––––––––
@@ -198,9 +199,15 @@ int main(void) {
 
     cout << "Peptides size: " << peptides.size() << endl;
     #endif
-    
+
     //head->~CodonTree();
     //cout << peptides[4]->getAmino().aminoAcid << endl;
+    for (int i = 0; i < peptides.size(); i++) {
+        displayAbbreviations(peptides[i]);
+        if (i != peptides.size() - 1) {
+            cout << '\n';
+        }
+    }
 
     return 0;
 }
@@ -492,4 +499,11 @@ vector<Node*> peptideSynthesis(string matureRna, int length, CodonTree* head) {
     }
 
     return sequences;
+}
+
+void displayAbbreviations(Node* root) {
+    for (Node* cursor = root; cursor; cursor = cursor->getNext()) {
+        cout << cursor->getAmino().abbreviation;
+    }
+    cout << '\n';
 }
