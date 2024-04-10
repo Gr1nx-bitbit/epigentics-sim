@@ -33,6 +33,8 @@ class CodonTree {
         bool isG();
         bool setAcid(AminoCodon acPair);
         AminoCodon getAcid(void);
+        CodonTree* getToTop(CodonTree* cursor);
+        void cascadeDelete(CodonTree* cursor);
 
     public:
         CodonTree();

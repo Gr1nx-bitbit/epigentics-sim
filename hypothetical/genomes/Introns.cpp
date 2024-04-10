@@ -196,6 +196,7 @@ int main(void) {
     }
 
     cout << "Peptides size: " << peptides.size() << endl;
+    //head->~CodonTree();
     //cout << peptides[4]->getAmino().aminoAcid << endl;
 
     return 0;

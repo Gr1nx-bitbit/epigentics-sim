@@ -169,15 +169,34 @@ CodonTree::CodonTree(CodonTree* parent, int nucleotide, AminoCodon acPair) {
     }
 }
 
-//I'll figure out the destructor later. I'll have to use recursion to get through all the nodes!
-// CodonTree::~CodonTree() {
-//     CodonTree* cursor;
-//     for (cursor = getParent(); cursor != nullptr; cursor = cursor->getParent());
-//     CodonTree* traverse;
-//     for (traverse = cursor; traverse->getU() != nullptr; traverse->getA()) {
+CodonTree* CodonTree::getToTop(CodonTree* cursor) {
+    if (cursor->getParent() == nullptr) {
+        return cursor;
+    } else {
+        cursor = cursor->getParent();
+    }
+    return cursor;
+}
 
+// void CodonTree::cascadeDelete(CodonTree* cursor) {
+//     //we have to return a bool to see if there is a child. only delete a parent if all are null
+//     if (cursor == nullptr) {
+//         delete cursor->getParent(); 
+//     } else {
+//         cascadeDelete(cursor->getU());
+//         cascadeDelete(cursor->getC());
+//         cascadeDelete(cursor->getA());
+//         cascadeDelete(cursor->getG());
 //     }
 // }
+
+//I'll figure out the destructor later. I'll have to use recursion to get through all the nodes!
+CodonTree::~CodonTree() {
+    //I have to traverse all the way to the top of the tree and then go down each branch and 
+    //delete each node.
+    CodonTree* head = getToTop(this);
+    cout << head->getA()->isA() << endl;
+}
 
 //sample invoke
 //aminoCodon(head, acPair, -1);
