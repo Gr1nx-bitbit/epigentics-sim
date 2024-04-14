@@ -1,1 +1,0 @@
-This directory contains source code that simulates how a retro-virus would insert DNA into your genome. {DESCRIBE WHAT A RETRO-VIRUS IS AND WHAT IT DOES :: OUTLINE WHAT WE NEED TO SIMULATE AND THE METHODS BY WHICH WE CAN DO THAT}
