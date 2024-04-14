@@ -1,15 +1,15 @@
-introns: introns.o Node.o genes.o
-	g++ introns.o Node.o genes.o
+Introns: Introns.o CodonTree.o
+	g++ Introns.o CodonTree.o -o Introns
 
-introns.o: introns.cpp
-	g++ -c introns.cpp
+introns.o: Introns.cpp
+	g++ -c Introns.cpp
 
-Node.o: Node.cpp
-	g++ -c Node.cpp
-
-genes.o: genes.cpp
-	g++ -c genes.cpp
+CodonTree.o: CodonTree.h CodonTree.cpp
+	g++ -c CodonTree.cpp
 
 clean:
 	rm *.o
 	find . -perm +100 -type f -delete
+
+run: Introns
+	./Introns
