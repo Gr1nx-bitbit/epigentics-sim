@@ -1,5 +1,8 @@
 #include <iostream>
 #include "AminoCodon.h"
+#include "GenePosition.h"
+#include "RnaAndExcision.h"
+#include "Node.h"
 #include "CodonTree.h"
 #include <fstream>
 #include <vector>
@@ -7,128 +10,6 @@ using namespace std;
 
 //#define DEBUG
 
-struct genePosition {
-    int startIndex;
-    int endIndex;
-};
-
-struct rnaAndExcision {
-    string* excised;
-    genePosition* indecies;
-    string rna;
-};
-
-class Node {
-    private:
-        genePosition gene;
-        bool gen;
-        AminoCodon acPair;
-        Node* next;
-        Node* parent;
-        Node* end;
-    public:
-        Node() {
-            gene.startIndex = 0;
-            gene.endIndex = 0;
-            gen = false;
-            acPair.aminoAcid = "";
-            acPair.codon = "";
-            acPair.startCodon = false;
-            acPair.terminationCodon = false;
-            next = nullptr;
-            parent = nullptr;
-            end = nullptr;
-        }
-
-        Node(genePosition geen) {
-            gene = geen;
-            gen = true;
-            acPair.aminoAcid = "";
-            acPair.codon = "";
-            acPair.startCodon = false;
-            acPair.terminationCodon = false;
-            next = nullptr;
-            parent = nullptr;
-            end = nullptr;
-        }
-
-        Node(AminoCodon acPair) {
-            gene.startIndex = 0;
-            gene.endIndex = 0;
-            gen = false;
-            this->acPair = acPair;
-            next = nullptr;
-            parent = nullptr;
-            end = nullptr;
-        }
-
-        // ~Node() {
-        //     if (end && parent && next) {
-        //         Node* p = getParent();
-        //         p->setNext(getNext());
-        //         p->setEnd(getEnd());
-        //         parent = nullptr;
-        //         next = nullptr;
-        //         end = nullptr;
-        //         delete this;
-        //     } else if (!parent && next && end) {
-        //         Node* n = getNext();
-        //         n->setEnd(getEnd());
-        //         next = nullptr;
-        //         end = nullptr;
-        //         delete this;
-        //     } else if (parent && next && !end) {
-        //         Node* p = getParent();
-        //         p->setNext(getNext());
-        //         delete this;
-        //     }
-        // }
-
-        genePosition getGene(void) {
-            return gene;
-        }
-
-        void setGene(genePosition geen) {
-            gene  = geen;
-            gen = true;
-        }
-
-        bool isGene(void) {
-            return gen;
-        }
-
-        AminoCodon getAmino(void) {
-            return acPair;
-        }
-
-        void setAmino(AminoCodon acPair) {
-            this->acPair = acPair;
-        }
-
-        Node* getNext(void) {
-            return next;
-        }
-
-        void setNext(Node* nxt) {
-            next = nxt;
-        }
-
-        Node* getParent(void) {
-            return parent;
-        }
-
-        void setParent(Node* parent) {
-            this->parent = parent;
-        }
-
-        Node* getEnd(void) {
-            return end;
-        }
-
-        void setEnd(Node* end) {
-            this->end = end;
-        }
-};
 
 /*
 ––––––––––––––––––––––––––
@@ -216,7 +97,7 @@ Node* examine(string sequence, int length) {
    bool start = false;
    Node* head = new Node();
    Node* cursor = head;
-   genePosition genCur;
+   GenePosition genCur;
    genCur.startIndex = -1;
    genCur.endIndex = -1;
 
@@ -250,9 +131,9 @@ rnaAndExcision matureRNA(string sequence, int length, Node* head) {
     }
     rnaAndExcision returnRNA;
     returnRNA.excised = new string[index];
-    returnRNA.indecies = new genePosition[index];
+    returnRNA.indecies = new GenePosition[index];
     string excisions[index];
-    genePosition pairs[index];
+    GenePosition pairs[index];
     index = 0;
     for (cursor = head; cursor; cursor = cursor->getNext()) {
         pairs[index] = cursor->getGene();

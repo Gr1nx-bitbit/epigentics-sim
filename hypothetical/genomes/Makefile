@@ -1,8 +1,11 @@
-Introns: Introns.o CodonTree.o
-	g++ Introns.o CodonTree.o -o Introns
+Introns: Introns.o CodonTree.o Node.o
+	g++ Introns.o CodonTree.o Node.o -o Introns
 
-introns.o: Introns.cpp
+Introns.o: Introns.cpp
 	g++ -c Introns.cpp
+
+Node.o: Node.cpp Node.h
+	g++ -c Node.cpp
 
 CodonTree.o: CodonTree.h CodonTree.cpp
 	g++ -c CodonTree.cpp
