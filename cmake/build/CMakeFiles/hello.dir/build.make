@@ -83,30 +83,30 @@ CMakeFiles/hello.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/hello.dir/main.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/reaper/workspace/DNA/cmake/main.cpp -o CMakeFiles/hello.dir/main.cpp.s
 
-CMakeFiles/hello.dir/include/Sample.cpp.o: CMakeFiles/hello.dir/flags.make
-CMakeFiles/hello.dir/include/Sample.cpp.o: /Users/reaper/workspace/DNA/cmake/include/Sample.cpp
-CMakeFiles/hello.dir/include/Sample.cpp.o: CMakeFiles/hello.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/reaper/workspace/DNA/cmake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/hello.dir/include/Sample.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/hello.dir/include/Sample.cpp.o -MF CMakeFiles/hello.dir/include/Sample.cpp.o.d -o CMakeFiles/hello.dir/include/Sample.cpp.o -c /Users/reaper/workspace/DNA/cmake/include/Sample.cpp
+CMakeFiles/hello.dir/src/Sample.cpp.o: CMakeFiles/hello.dir/flags.make
+CMakeFiles/hello.dir/src/Sample.cpp.o: /Users/reaper/workspace/DNA/cmake/src/Sample.cpp
+CMakeFiles/hello.dir/src/Sample.cpp.o: CMakeFiles/hello.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/reaper/workspace/DNA/cmake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/hello.dir/src/Sample.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/hello.dir/src/Sample.cpp.o -MF CMakeFiles/hello.dir/src/Sample.cpp.o.d -o CMakeFiles/hello.dir/src/Sample.cpp.o -c /Users/reaper/workspace/DNA/cmake/src/Sample.cpp
 
-CMakeFiles/hello.dir/include/Sample.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/hello.dir/include/Sample.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/reaper/workspace/DNA/cmake/include/Sample.cpp > CMakeFiles/hello.dir/include/Sample.cpp.i
+CMakeFiles/hello.dir/src/Sample.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/hello.dir/src/Sample.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/reaper/workspace/DNA/cmake/src/Sample.cpp > CMakeFiles/hello.dir/src/Sample.cpp.i
 
-CMakeFiles/hello.dir/include/Sample.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/hello.dir/include/Sample.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/reaper/workspace/DNA/cmake/include/Sample.cpp -o CMakeFiles/hello.dir/include/Sample.cpp.s
+CMakeFiles/hello.dir/src/Sample.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/hello.dir/src/Sample.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/reaper/workspace/DNA/cmake/src/Sample.cpp -o CMakeFiles/hello.dir/src/Sample.cpp.s
 
 # Object files for target hello
 hello_OBJECTS = \
 "CMakeFiles/hello.dir/main.cpp.o" \
-"CMakeFiles/hello.dir/include/Sample.cpp.o"
+"CMakeFiles/hello.dir/src/Sample.cpp.o"
 
 # External object files for target hello
 hello_EXTERNAL_OBJECTS =
 
 hello: CMakeFiles/hello.dir/main.cpp.o
-hello: CMakeFiles/hello.dir/include/Sample.cpp.o
+hello: CMakeFiles/hello.dir/src/Sample.cpp.o
 hello: CMakeFiles/hello.dir/build.make
 hello: CMakeFiles/hello.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/reaper/workspace/DNA/cmake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable hello"

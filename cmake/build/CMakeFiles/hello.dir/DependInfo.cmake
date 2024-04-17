@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/reaper/workspace/DNA/cmake/include/Sample.cpp" "CMakeFiles/hello.dir/include/Sample.cpp.o" "gcc" "CMakeFiles/hello.dir/include/Sample.cpp.o.d"
   "/Users/reaper/workspace/DNA/cmake/main.cpp" "CMakeFiles/hello.dir/main.cpp.o" "gcc" "CMakeFiles/hello.dir/main.cpp.o.d"
+  "/Users/reaper/workspace/DNA/cmake/src/Sample.cpp" "CMakeFiles/hello.dir/src/Sample.cpp.o" "gcc" "CMakeFiles/hello.dir/src/Sample.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

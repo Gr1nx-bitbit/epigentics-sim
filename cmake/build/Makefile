@@ -129,30 +129,6 @@ hello/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/hello.dir/build.make CMakeFiles/hello.dir/build
 .PHONY : hello/fast
 
-include/Sample.o: include/Sample.cpp.o
-.PHONY : include/Sample.o
-
-# target to build an object file
-include/Sample.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/hello.dir/build.make CMakeFiles/hello.dir/include/Sample.cpp.o
-.PHONY : include/Sample.cpp.o
-
-include/Sample.i: include/Sample.cpp.i
-.PHONY : include/Sample.i
-
-# target to preprocess a source file
-include/Sample.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/hello.dir/build.make CMakeFiles/hello.dir/include/Sample.cpp.i
-.PHONY : include/Sample.cpp.i
-
-include/Sample.s: include/Sample.cpp.s
-.PHONY : include/Sample.s
-
-# target to generate assembly for a file
-include/Sample.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/hello.dir/build.make CMakeFiles/hello.dir/include/Sample.cpp.s
-.PHONY : include/Sample.cpp.s
-
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -177,6 +153,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/hello.dir/build.make CMakeFiles/hello.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/Sample.o: src/Sample.cpp.o
+.PHONY : src/Sample.o
+
+# target to build an object file
+src/Sample.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hello.dir/build.make CMakeFiles/hello.dir/src/Sample.cpp.o
+.PHONY : src/Sample.cpp.o
+
+src/Sample.i: src/Sample.cpp.i
+.PHONY : src/Sample.i
+
+# target to preprocess a source file
+src/Sample.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hello.dir/build.make CMakeFiles/hello.dir/src/Sample.cpp.i
+.PHONY : src/Sample.cpp.i
+
+src/Sample.s: src/Sample.cpp.s
+.PHONY : src/Sample.s
+
+# target to generate assembly for a file
+src/Sample.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hello.dir/build.make CMakeFiles/hello.dir/src/Sample.cpp.s
+.PHONY : src/Sample.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -186,12 +186,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... hello"
-	@echo "... include/Sample.o"
-	@echo "... include/Sample.i"
-	@echo "... include/Sample.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... src/Sample.o"
+	@echo "... src/Sample.i"
+	@echo "... src/Sample.s"
 .PHONY : help
 
 
