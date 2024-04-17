@@ -129,6 +129,30 @@ hello/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/hello.dir/build.make CMakeFiles/hello.dir/build
 .PHONY : hello/fast
 
+include/Sample.o: include/Sample.cpp.o
+.PHONY : include/Sample.o
+
+# target to build an object file
+include/Sample.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hello.dir/build.make CMakeFiles/hello.dir/include/Sample.cpp.o
+.PHONY : include/Sample.cpp.o
+
+include/Sample.i: include/Sample.cpp.i
+.PHONY : include/Sample.i
+
+# target to preprocess a source file
+include/Sample.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hello.dir/build.make CMakeFiles/hello.dir/include/Sample.cpp.i
+.PHONY : include/Sample.cpp.i
+
+include/Sample.s: include/Sample.cpp.s
+.PHONY : include/Sample.s
+
+# target to generate assembly for a file
+include/Sample.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hello.dir/build.make CMakeFiles/hello.dir/include/Sample.cpp.s
+.PHONY : include/Sample.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -162,6 +186,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... hello"
+	@echo "... include/Sample.o"
+	@echo "... include/Sample.i"
+	@echo "... include/Sample.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
