@@ -19,8 +19,8 @@ int main(void) {
 
     char codon[3] = {'a', 'u', 'g'};
     string cool = codon;
-    string amino = head->getAminoCodon(cool, head);
-    cout << amino << endl;
+    AminoCodon amino = head->getAminoCodon(cool, head);
+    cout << amino.abbreviation << endl;
 
     return 0;
 }

@@ -9,7 +9,7 @@
 #include <vector>
 using namespace std;
 
-#define DEBUG
+//#define DEBUG
 
 
 int main(void) {
@@ -22,6 +22,7 @@ int main(void) {
     //compare(rnaSequence, rnaSequence.length(), preAmino);
 
     //create a codonTree to store all the amino acids
+    //so the problem is that the file isn't opening...
     CodonTree* head = new CodonTree();
     string aminoCodontext;
     ifstream myFile("aminoCodon.txt");
@@ -30,13 +31,16 @@ int main(void) {
     while(getline(myFile, aminoCodontext, '\n')) {
         AminoCodon acPair = parse(aminoCodontext);
         head->addAminoCodon(head, acPair, -1);
+        cout << "hello!" << endl;
     }
 
     //this isn't working right now
+    #ifdef DEBUG
     cout << "hello " << endl;
     char yes;
     head->displayTree(head, head, yes, "");
     cout << "bye" << endl;
+    #endif
     vector<Node*> peptides = peptideSynthesis(preAmino.rna, preAmino.rna.length(), head);
 
     Node* cursor;
