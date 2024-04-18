@@ -31,8 +31,8 @@ int main(void) {
     while(getline(myFile, aminoCodontext, '\n')) {
         AminoCodon acPair = parse(aminoCodontext);
         head->addAminoCodon(head, acPair, -1);
-        cout << "hello!" << endl;
     }
+
 
     //this isn't working right now
     #ifdef DEBUG

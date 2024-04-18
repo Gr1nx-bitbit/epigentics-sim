@@ -21,6 +21,8 @@ int main(void) {
     string cool = codon;
     AminoCodon amino = head->getAminoCodon(cool, head);
     cout << amino.abbreviation << endl;
+    char yes;
+    head->displayTree(head, head, yes, "");
 
     return 0;
 }

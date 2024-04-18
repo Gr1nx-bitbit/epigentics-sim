@@ -1,4 +1,4 @@
-#include "CodonTree.h"
+#include "../include/CodonTree.h"
 #include <iostream>
 using namespace std;
 //#define DEBUG

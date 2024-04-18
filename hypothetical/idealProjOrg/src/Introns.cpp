@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-#define DEBUG
+//#define DEBUG
 
 Node* examine(string sequence, int length) {
    bool start = false;
