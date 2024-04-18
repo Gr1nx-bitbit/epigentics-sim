@@ -1,5 +1,5 @@
-#include "CodonTree.h"
-#include "AminoCodon.h"
+#include "../include/AminoCodon.h"
+#include "../include/CodonTree.h"
 #include <fstream>
 #include <iostream>
 //#include <vector>
