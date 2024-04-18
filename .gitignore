@@ -1,4 +1,4 @@
 *.out
 *.o
 /PAT
-/build
+**/build
